@@ -1,0 +1,36 @@
+def next_move(string):
+
+    cards = "A23456789JQK"
+    a_dict = {}
+    for i in cards:
+        try:
+            a_dict[i] = int(i)
+        except:
+            a_dict[i] = 10
+    a_dict["A"] = 11
+
+    def get_total():
+        total = 0
+        for i in string:
+            total += a_dict[i]
+        return total
+    total = get_total()
+
+    if total > 21:
+        a_dict["A"] = 1
+        total = get_total()
+
+    if 17 <= total <= 21:
+        return "Stay"
+    elif total < 17:
+        return "Hit"
+    return "Bash"
+
+
+
+
+
+print(next_move("A3"))
+print(next_move("A39"))
+print(next_move("A397"))
+print(next_move("A397K"))
